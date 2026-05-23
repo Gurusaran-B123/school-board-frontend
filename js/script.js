@@ -252,7 +252,6 @@ function initDashboard() {
 
 // ===== INITIALIZE =====
 
-
 window.addEventListener('load', () => {
     const page = window.location.pathname.split('/').pop() || 'index.html';
 
@@ -268,10 +267,13 @@ window.addEventListener('load', () => {
         document.head.appendChild(link);
     }
 
-    if ((page === 'dashboard.html' || page === 'upload.html') && localStorage.getItem('user')) {
-    initDashboard();
-}
+    if (
+        (page === 'dashboard.html' || page === 'upload.html') &&
+        localStorage.getItem('user')
+    ) {
+        initDashboard();
     }
+
 });
 
    
