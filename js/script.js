@@ -1,7 +1,7 @@
 // ===== CONFIGURATION =====
 const API_URL = 'https://school-board-backend-ob5n.onrender.com';
 let currentUser = null;
-let currentRole = 'student';
+let currentRole = 'parent';
 
 // ===== DOM ELEMENTS =====
 const loginPage = document.getElementById('loginPage');
@@ -203,7 +203,7 @@ function displayContent(contents) {
             videoHtml = '<div class="video-container"><div class="video-placeholder">📄</div></div>';
         }
 
-        const deleteBtn = currentRole === 'admin' ? `<button class="delete-btn" onclick="deleteContent(${content.id})">Delete</button>` : '';
+        const deleteBtn = currentRole === 'parent' ? `<button class="delete-btn" onclick="deleteContent(${content.id})">Delete</button>` : '';
 
         return `<div class="content-card">
             ${videoHtml}
@@ -245,7 +245,7 @@ function initDashboard() {
     currentRole = savedRole;
 
     if (userNameDisplay) userNameDisplay.textContent = currentUser.name;
-    if (userRoleDisplay) userRoleDisplay.textContent = currentRole === 'student' ? 'Student' : 'Admin';
+    if (userRoleDisplay) userRoleDisplay.textContent = currentRole === 'student' ? 'Student' : 'parent';
 
     loadContent();
 }
@@ -268,8 +268,9 @@ window.addEventListener('load', () => {
         document.head.appendChild(link);
     }
 
-    if (page === 'dashboard.html' || page === 'upload.html') {
-        initDashboard();
+    if ((page === 'dashboard.html' || page === 'upload.html') && localStorage.getItem('user')) {
+    initDashboard();
+}
     }
 });
 
