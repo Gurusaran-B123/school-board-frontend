@@ -72,7 +72,7 @@ async function handleLogin(e) {
     loginBtn.innerHTML = '<span class="loading"></span>';
 
     try {
-        const response = await fetch(`${API_URL}/login`, {
+        const response = await fetch(`${API_URL}/api/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, key, role: currentRole })
@@ -115,7 +115,7 @@ async function handleSubmit() {
     submitBtn.innerHTML = '<span class="loading"></span>';
 
     try {
-        const response = await fetch(`${API_URL}/content`, {
+        const response = await fetch(`${API_URL}/api/content`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text, youtube_link: link, parent_id: currentUser.id })
@@ -167,7 +167,7 @@ function extractYoutubeId(url) {
 }
 async function loadContent() {
     try {
-        const response = await fetch(`${API_URL}/content`);
+        const response = await fetch(`${API_URL}/api/content`);
         const data = await response.json();
         if (response.ok) displayContent(data.content);
     } catch (error) {
@@ -203,7 +203,7 @@ function displayContent(contents) {
             videoHtml = '<div class="video-container"><div class="video-placeholder">📄</div></div>';
         }
 
-        const deleteBtn = currentRole === 'parent' ? `<button class="delete-btn" onclick="deleteContent(${content.id})">Delete</button>` : '';
+        const deleteBtn = currentRole === 'admin' ? `<button class="delete-btn" onclick="deleteContent(${content.id})">Delete</button>` : '';
 
         return `<div class="content-card">
             ${videoHtml}
@@ -220,7 +220,7 @@ async function deleteContent(id) {
     if (!confirm('Delete?')) return;
 
     try {
-        const response = await fetch(`${API_URL}/content/${id}`, { method: 'DELETE' });
+        const response = await fetch(`${API_URL}/api/content/${id}`, { method: 'DELETE' });
         if (response.ok) {
             showSuccess('Deleted');
             loadContent();
@@ -252,10 +252,15 @@ function initDashboard() {
 
 // ===== INITIALIZE =====
 
+
 window.addEventListener('load', () => {
     const page = window.location.pathname.split('/').pop() || 'index.html';
 
-    // Add Google Fonts
+    if (!localStorage.getItem('user') && page !== 'index.html') {
+        window.location.href = 'index.html';
+        return;
+    }
+
     if (!document.querySelector('link[href*="fonts.googleapis.com"]')) {
         const link = document.createElement('link');
         link.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap';
@@ -263,11 +268,10 @@ window.addEventListener('load', () => {
         document.head.appendChild(link);
     }
 
-    // Initialize dashboard if on dashboard or upload page
     if (page === 'dashboard.html' || page === 'upload.html') {
         initDashboard();
     }
+});
 
    
-});
 
