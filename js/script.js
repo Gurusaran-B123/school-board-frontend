@@ -1,5 +1,5 @@
 // ===== CONFIGURATION =====
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://school-board-backend-ob5n.onrender.com';
 let currentUser = null;
 let currentRole = 'student';
 
