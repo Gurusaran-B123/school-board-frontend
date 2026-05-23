@@ -11,40 +11,7 @@
     <div class="sl"><h1>SMART<span>LEARNING</span></h1></div>
     <div class="container">
         
-        <!-- ADMIN KEY GENERATION PAGE (HIDDEN BY DEFAULT) -->
-        <div class="admin-page" id="adminPage" style="display: none;">
-            <div class="login-sidebar">
-                <div class="logo"><img src="edu.png" alt="edu" class="edu-img"></div>
-                <h1>SCHOOL BOARD</h1>
-                <p class="subtitle">
-                   A secure digital space where teachers and parents guide students with focused educational content, safe learning resources, and distraction-free study support.
-                </p>
-            </div>
-            <div class="login-content">
-                <div class="error-message" id="adminErrorMessage"></div>
-                <div class="success-message" id="adminSuccessMessage"></div>
-                <h2 style="margin-bottom: 2rem; font-size: 1.5rem;">Create Admin Account</h2>
-                <form id="adminForm">
-                    <div class="form-group">
-                        <label for="adminName">Admin Name</label>
-                        <input type="text" id="adminName" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="adminKey">Access Key</label>
-                        <input type="text" id="adminKey" placeholder="Enter key or leave blank to auto-generate" readonly>
-                    </div>
-                    <button type="button" class="login-btn" id="generateKeyBtn" style="margin-bottom: 1rem;">
-                        Generate Key
-                    </button>
-                    <button type="submit" class="login-btn" id="createAdminBtn">
-                        Create Account
-                    </button>
-                    <button type="button" class="login-btn" id="backToLoginBtn" style="background: #666; margin-top: 1rem;">
-                        Back to Login
-                    </button>
-                </form>
-            </div>
-        </div>
+     
 
         <!-- LOGIN PAGE -->
         <div class="login-page" id="loginPage">
@@ -84,10 +51,7 @@
                     <button type="submit" class="login-btn" id="loginBtn">
                         Login
                     </button>
-                    <!-- ADD THIS BUTTON -->
-                    <button type="button" class="login-btn" id="adminSignupBtn" style="background: #10b981; margin-top: 1rem;">
-                        New Admin? Create Account
-                    </button>
+                   
                 </form>
             </div>
         </div>
