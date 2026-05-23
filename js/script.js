@@ -267,9 +267,115 @@ window.addEventListener('load', () => {
     if (page === 'dashboard.html' || page === 'upload.html') {
         initDashboard();
     }
+
+    // ===== ADMIN KEY GENERATION =====
+
+const adminPage = document.getElementById('adminPage');
+const adminForm = document.getElementById('adminForm');
+const adminNameInput = document.getElementById('adminName');
+const adminKeyInput = document.getElementById('adminKey');
+const generateKeyBtn = document.getElementById('generateKeyBtn');
+const createAdminBtn = document.getElementById('createAdminBtn');
+const adminSignupBtn = document.getElementById('adminSignupBtn');
+const backToLoginBtn = document.getElementById('backToLoginBtn');
+const adminErrorMessage = document.getElementById('adminErrorMessage');
+const adminSuccessMessage = document.getElementById('adminSuccessMessage');
+
+// Generate random key
+function generateRandomKey() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+// Show/Hide pages
+if (adminSignupBtn) {
+    adminSignupBtn.addEventListener('click', () => {
+        loginPage.style.display = 'none';
+        adminPage.style.display = 'flex';
+    });
+}
+
+if (backToLoginBtn) {
+    backToLoginBtn.addEventListener('click', () => {
+        adminPage.style.display = 'none';
+        loginPage.style.display = 'flex';
+        if (adminForm) adminForm.reset();
+        if (adminKeyInput) adminKeyInput.value = '';
+    });
+}
+
+// Generate key button
+if (generateKeyBtn) {
+    generateKeyBtn.addEventListener('click', () => {
+        if (adminKeyInput) adminKeyInput.value = generateRandomKey();
+    });
+}
+
+// Show error for admin
+function showAdminError(msg) {
+    if (adminErrorMessage) {
+        adminErrorMessage.textContent = msg;
+        adminErrorMessage.style.display = 'block';
+        setTimeout(() => adminErrorMessage.style.display = 'none', 5000);
+    }
+}
+
+// Show success for admin
+function showAdminSuccess(msg) {
+    if (adminSuccessMessage) {
+        adminSuccessMessage.textContent = msg;
+        adminSuccessMessage.style.display = 'block';
+        setTimeout(() => adminSuccessMessage.style.display = 'none', 5000);
+    }
+}
+
+// Create admin account
+if (adminForm) {
+    adminForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const name = adminNameInput.value.trim();
+        const key = adminKeyInput.value.trim();
+        
+        if (!name) {
+            showAdminError('Enter admin name');
+            return;
+        }
+        
+        if (!key) {
+            showAdminError('Generate or enter a key');
+            return;
+        }
+        
+        createAdminBtn.disabled = true;
+        createAdminBtn.innerHTML = '<span class="loading"></span>';
+        
+        try {
+            const response = await fetch(`${API_URL}/admin/create`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, key })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                showAdminSuccess(`Admin created! Key: ${key} - Share with students`);
+                adminForm.reset();
+                adminKeyInput.value = '';
+                setTimeout(() => {
+                    adminPage.style.display = 'none';
+                    loginPage.style.display = 'flex';
+                }, 2000);
+            } else {
+                showAdminError(data.message || 'Failed to create admin');
+            }
+        } catch (error) {
+            showAdminError('Error: ' + error.message);
+        } finally {
+            createAdminBtn.disabled = false;
+            createAdminBtn.innerHTML = 'Create Account';
+        }
+    });
+}
 });
 
-// Reload content every 30 seconds
-setInterval(() => {
-    if (currentUser) loadContent();
-}, 30000);
