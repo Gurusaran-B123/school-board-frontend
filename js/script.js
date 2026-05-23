@@ -8,7 +8,7 @@ const loginPage = document.getElementById('loginPage');
 const loginForm = document.getElementById('loginForm');
 const roleButtons = document.querySelectorAll('.role-btn');
 const nameInput = document.getElementById('name');
-const dobInput = document.getElementById('dob');
+const keyInput = document.getElementById('key');
 const loginBtn = document.getElementById('loginBtn');
 const errorMessage = document.getElementById('errorMessage');
 const successMessage = document.getElementById('successMessage');
@@ -61,9 +61,9 @@ function showSuccess(msg) {
 async function handleLogin(e) {
     e.preventDefault();
     const name = nameInput.value.trim();
-    const dob = dobInput.value;
+    const key = keyInput.value.trim();
 
-    if (!name || !dob) {
+    if (!name || !key) {
         showError('Fill all fields');
         return;
     }
@@ -75,7 +75,7 @@ async function handleLogin(e) {
         const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, dob, role: currentRole })
+            body: JSON.stringify({ name, key, role: currentRole })
         });
 
         const data = await response.json();
