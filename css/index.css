@@ -21,7 +21,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(360deg,white,rgba(255, 255, 0, 0.288));
     color: var(--text);
-    /* min-height: 100vh; */
+    overflow-y:hidden;
     position: relative;
     overflow-x: hidden;
 }
@@ -44,7 +44,7 @@ body {
     align-items: center;
     justify-content: center;
     color: darkcyan;
-    margin-top: 40px;
+    margin-top: 30px;
    
     
 }
@@ -55,7 +55,7 @@ body {
 .container {
     position: relative;
     z-index: 1;
-   
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
