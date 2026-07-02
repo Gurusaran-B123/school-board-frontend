@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Sign Up - School Board</title>
+<style href="signup.css">
+  
+</style>
+</head>
+<body>
 
+<div class="card">
+  <h1>Create Admin Account</h1>
+  <p class="sub">Sign up once to get your unique access key</p>
+
+  <div id="formSection">
+    <input type="text" id="signupName" placeholder="Your full name" required>
+    <button id="signupBtn">Create Account</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <div class="key-box" id="keyBox">
+    <p>Your unique access key:</p>
+    <div class="key" id="generatedKey">-</div>
+    <p class="warning">⚠️ Save this now — you'll need it every time you log in, and to share with your students. It cannot be recovered later.</p>
+    <div class="key-actions">
+      <button id="copyBtn">📋 Copy Key</button>
+      <button id="downloadBtn">⬇️ Download</button>
+    </div>
+    <button id="continueBtn">Continue to Dashboard</button>
+  </div>
+
+  <a href="index.html" class="link">Already have an account? Sign in</a>
+</div>
+
+<script href="signup.js">
+
+</script>
+
+</body>
+</html>
