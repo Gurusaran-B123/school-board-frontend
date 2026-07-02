@@ -21,7 +21,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(360deg,white,rgba(255, 255, 0, 0.288));
     color: var(--text);
-    min-height: 100vh;
+    /* min-height: 100vh; */
     position: relative;
     overflow-x: hidden;
 }
@@ -125,7 +125,7 @@ body {
 
 .footer {
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     background-color: #10b981;
     display: flex;
     flex-direction: row;
