@@ -21,7 +21,6 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(360deg,white,rgba(255, 255, 0, 0.288));
     color: var(--text);
-    overflow-y:hidden;
     position: relative;
     overflow-x: hidden;
 }
