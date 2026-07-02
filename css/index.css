@@ -44,7 +44,7 @@ body {
     align-items: center;
     justify-content: center;
     color: darkcyan;
-    margin-top: 30px;
+    margin-top: 14px;
    
     
 }
@@ -55,11 +55,11 @@ body {
 .container {
     position: relative;
     z-index: 1;
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .login-page {
